@@ -20,9 +20,7 @@ matplotlib.use("TkAgg")
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
-# ----------------------------------------------------------------
-# Constantes fisicas (SI)
-# ----------------------------------------------------------------
+# -----------------------Constantes fisicas ------------------------------------
 Q    = 1.602176634e-19
 M    = 9.1093837015e-31
 EPS0 = 8.8541878128e-12
@@ -44,9 +42,7 @@ def nm_de_cm1(numero_onda_cm1):
     return 1e7 / numero_onda_cm1
 
 
-# ----------------------------------------------------------------
 # Fisica: calculo de n(lambda) y alpha(lambda) para j osciladores
-# ----------------------------------------------------------------
 def calcular_n_alpha(lamda_array_nm, osciladores, N, exacto=True):
     """
     osciladores: lista de tuplas (lamda_j_nm, gamma_j, f_j)
@@ -78,10 +74,7 @@ def calcular_n_alpha(lamda_array_nm, osciladores, N, exacto=True):
 
     return n, alpha
 
-
-# ----------------------------------------------------------------
 # Ventana emergente para agregar / editar un oscilador
-# ----------------------------------------------------------------
 class DialogoOscilador(tk.Toplevel):
     def __init__(self, parent, valores_iniciales=None):
         super().__init__(parent)
@@ -155,10 +148,7 @@ class DialogoOscilador(tk.Toplevel):
         self.resultado = (lamda_nm, gamma_j, f_j)
         self.destroy()
 
-
-# ----------------------------------------------------------------
-# Aplicacion principal
-# ----------------------------------------------------------------
+# Aplicacion 
 class AppLorentz(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -268,9 +258,8 @@ class AppLorentz(tk.Tk):
         barra = NavigationToolbar2Tk(self.canvas, panel)
         barra.update()
 
-    # ------------------------------------------------------------
+
     # Manejo de la tabla de osciladores
-    # ------------------------------------------------------------
     def _refrescar_tabla(self):
         self.tabla.delete(*self.tabla.get_children())
         for lamda_nm, gamma_j, f_j in self.osciladores:
@@ -314,9 +303,8 @@ class AppLorentz(tk.Tk):
         ]
         self._refrescar_tabla()
 
-    # ------------------------------------------------------------
+
     # Guardar / cargar configuracion (JSON) -- para reproducibilidad
-    # ------------------------------------------------------------
     def _guardar_config(self):
         ruta = filedialog.asksaveasfilename(defaultextension=".json",
                                              filetypes=[("JSON", "*.json")])
@@ -350,9 +338,7 @@ class AppLorentz(tk.Tk):
         self.var_escala.set(datos.get("escala", "lineal"))
         self._refrescar_tabla()
 
-    # ------------------------------------------------------------
     # Graficar
-    # ------------------------------------------------------------
     def _graficar(self):
         if not self.osciladores:
             messagebox.showwarning("Sin osciladores", "Agrega al menos un oscilador antes de graficar.")
