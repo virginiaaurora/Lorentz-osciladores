@@ -6,8 +6,6 @@ Permite agregar/quitar cualquier numero de osciladores (resonancias),
 cada uno con su propia posicion (lambda_j), amortiguamiento (gamma_j)
 y fuerza de oscilador (f_j), y grafica n(lambda) y alpha(lambda)
 resultantes de sumar sobre todos ellos.
-
-Autor: generado con ayuda de Claude para Casiopea (IFUAP-BUAP)
 """
 
 import json
